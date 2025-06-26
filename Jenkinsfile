@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Optional: reference your secret if needed (e.g., API key or token)
-        MY_SECRET = credentials('my-secret-id')  // Replace with your actual Jenkins credential ID
+        MY_SECRET = credentials('1001')  // Replace with your actual Jenkins credential ID
     }
 
     stages {
