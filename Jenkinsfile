@@ -6,35 +6,38 @@ pipeline {
         MY_SECRET = credentials('1001')  // Replace with your actual Jenkins credential ID
     }
 
-    stages {
+   
+agent {
+        docker {
+            image 'python:3.11'  // Or any Python version you need
+            args '-u root'       // Use root if pip installs are needed
+        }
+    }
+ stages {
         stage('Checkout Code') {
             steps {
                 git credentialsId: '1001', url: 'https://github.com/annahristova/vmbix.git'
             }
         }
-
+    stages {
         stage('Install Dependencies') {
             steps {
-                echo 'Installing Python dependencies...'
-                sh 'python3 -m venv venv'
+                sh 'python -m venv venv'
                 sh '. venv/bin/activate && pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                echo 'Running pytest...'
                 sh '. venv/bin/activate && pytest tests/'
             }
         }
     }
 
     post {
-        success {
-            echo '✅ Pipeline completed successfully.'
-        }
-        failure {
-            echo '❌ Pipeline failed. Check the logs.'
+        always {
+            echo 'Pipeline finished.'
         }
     }
 }
+    
