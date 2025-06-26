@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git credentialsId: '1001', url: 'https://github.com/your-user/your-repo.git'
+                git credentialsId: '1001', url: 'https://github.com/annahristova/vmbix.git'
             }
         }
 
