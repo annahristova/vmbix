@@ -12,7 +12,7 @@ pipeline {
                 git credentialsId: 'my-git-creds-id', url: 'https://github.com/your-user/your-repo.git'
             }
         }
-
+    }
     post {
         always {
             echo 'Pipeline finished.'
